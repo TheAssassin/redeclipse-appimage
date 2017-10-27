@@ -26,10 +26,10 @@ RUN cd /tmp && \
     wget https://www.libsdl.org/release/SDL2-2.0.7.tar.gz -O- | tar xz && \
     wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.2.tar.gz -O- | tar xz && \
     wget https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.2.tar.gz -O- | tar xz && \
-    (cd libpng-1.6.34 && ./configure --prefix=/usr && make -j$(nproc) install) && \
-    (cd SDL2-2.0.7 && mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr .. && make -j$(nproc) install) && \
-    (cd SDL2_image-2.0.2 && ./configure --prefix=/usr && make install) && \
-    (cd SDL2_mixer-2.0.2 && ./configure --prefix=/usr && make install)
+    (cd libpng-1.* && ./configure --prefix=/usr && make -j$(nproc) install) && \
+    (cd SDL2-2.* && mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr .. && make -j$(nproc) install) && \
+    (cd SDL2_image-2.* && ./configure --build=x86_64-linux-gnu --prefix=/usr --includedir=\${prefix}/include --mandir=\${prefix}/share/man --infodir=\${prefix}/share/info --sysconfdir=/etc --localstatedir=/var --disable-silent-rules --libdir=\${prefix}/lib/x86_64-linux-gnu --libexecdir=\${prefix}/lib/x86_64-linux-gnu --disable-maintainer-mode --disable-dependency-tracking --disable-jpg-shared --disable-tif-shared --disable-png-shared --disable-webp-shared && make install) && \
+    (cd SDL2_mixer-2.* && ./configure --build=x86_64-linux-gnu --prefix=/usr --includedir=\${prefix}/include --mandir=\${prefix}/share/man --infodir=\${prefix}/share/info --sysconfdir=/etc --localstatedir=/var --disable-silent-rules --libdir=\${prefix}/lib/x86_64-linux-gnu --libexecdir=\${prefix}/lib/x86_64-linux-gnu --disable-maintainer-mode --disable-dependency-tracking --enable-music-cmd --enable-music-flac --disable-music-flac-shared --enable-music-midi-fluidsynth --disable-music-midi-fluidsynth-shared --enable-music-midi-timidity --enable-music-midi-native --enable-music-mod --enable-music-mod-modplug --disable-music-mod-mikmod --disable-music-mod-modplug-shared --enable-music-mp3 --disable-music-mp3-smpeg --enable-music-mp3-mad-gpl --enable-music-ogg --disable-music-ogg-shared --enable-music-wave && make install)
 
 RUN addgroup --gid 1000 builder && \
     adduser --uid 1000 --gid 1000 --disabled-login --disabled-password \
